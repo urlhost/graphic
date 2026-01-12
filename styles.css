@@ -99,12 +99,6 @@ a {
 }
 
 .success {
-    color: var(--text-primary);
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.login {
     color: var(--accent);
     font-weight: bold;
     margin-top: 10px;
