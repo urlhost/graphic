@@ -15,23 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    bits.forEach(bit => {
-        bit.addEventListener('mouseenter', () => {
-            bit.style.opacity = "1";
-            bit.style.transform = "scale(1.2)";
-        });
-
-        bit.addEventListener('mouseleave', () => {
-            bit.style.opacity = "0.3";
-            bit.style.transform = "scale(1)";
-            bit.style.color = '';
-        });
-    });
-
     const runTerminal = () => {
         if (successLine) successLine.style.opacity = "0";
         if (loginLine) loginLine.style.opacity = "0";
         
+        // 1. Animate Terminal Lines
         terminalLines.forEach((line, index) => {
             line.style.opacity = "0";
             line.style.transform = "translateX(-10px)";
@@ -42,21 +30,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 800 + (index * 400));
         });
 
+        // Calculate when terminal lines finish
+        const terminalFinishTime = 800 + (terminalLines.length * 400);
+
+        // 2. Animate Success Line (appears after terminal lines)
         setTimeout(() => {
             if (successLine) {
                 successLine.style.opacity = "1";
                 successLine.style.transform = "scale(1.05)";
                 successLine.style.transition = "all 0.4s ease-out";
+                // Reset scale after pop
+                setTimeout(() => successLine.style.transform = "scale(1)", 400);
             }
-        }, 800 + (terminalLines.length * 400) + 300);
+        }, terminalFinishTime + 300);
 
+        // 3. Animate Login Line (appears after success line)
         setTimeout(() => {
             if (loginLine) {
                 loginLine.style.opacity = "1";
                 loginLine.style.transform = "scale(1.05)";
                 loginLine.style.transition = "all 0.4s ease-out";
+                // Reset scale after pop
+                setTimeout(() => loginLine.style.transform = "scale(1)", 400);
             }
-        }, 800 + (successLine.length * 400) + 300);
+        }, terminalFinishTime + 1000); // 1000ms delay to feel distinct from success
     };
 
     initializeLogo();
