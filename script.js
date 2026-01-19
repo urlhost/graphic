@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 successLine.style.opacity = "1";
                 successLine.style.transform = "scale(1.05)";
                 successLine.style.transition = "all 0.4s ease-out";
-                // Reset scale after pop
                 setTimeout(() => successLine.style.transform = "scale(1)", 400);
             }
         }, terminalFinishTime + 300);
